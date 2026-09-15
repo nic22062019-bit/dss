@@ -29,11 +29,11 @@ if [ "$DEBUG_ON" = "1" ]; then
   # shellcheck disable=SC2086
   dlv --headless --listen=:4000 --api-version=2 --accept-multiclient exec --continue /usr/bin/core-service -- ${DATASTORE_CONNECTION} \
   ${MONITORING_FLAGS} \
-  -public_key_files /var/test-certs/auth2.pem \
+  -public_key_files /var/test-certs/auth2.pem,/var/test-certs/keycloak-rs256.pem \
   -log_format console \
   -dump_requests \
   -addr :8082 \
-  -accepted_jwt_audiences localhost,host.docker.internal,local-dss-core-service,dss_sandbox-local-dss-core-service-1,core-service \
+  -accepted_jwt_audiences localhost,host.docker.internal,local-dss-core-service,dss_sandbox-local-dss-core-service-1,core-service,utm-dss,flight-blender \
   -enable_scd \
   -allow_http_base_urls \
   -locality local_dev \
@@ -47,11 +47,11 @@ else
   exec /usr/bin/core-service \
   ${DATASTORE_CONNECTION} \
   ${MONITORING_FLAGS} \
-  -public_key_files /var/test-certs/auth2.pem \
+  -public_key_files /var/test-certs/auth2.pem,/var/test-certs/keycloak-rs256.pem \
   -log_format console \
   -dump_requests \
   -addr :8082 \
-  -accepted_jwt_audiences localhost,host.docker.internal,local-dss-core-service,dss_sandbox-local-dss-core-service-1,core-service \
+  -accepted_jwt_audiences localhost,host.docker.internal,local-dss-core-service,dss_sandbox-local-dss-core-service-1,core-service,utm-dss,flight-blender \
   -enable_scd \
   -allow_http_base_urls \
   -locality local_dev \
