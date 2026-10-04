@@ -98,6 +98,10 @@ services:
       - dss_sandbox_default_network
 
   local-dss-core-service:
+    # Должен переживать перезагрузку хоста:
+    # без этой строки DSS исчезал после ребута,
+    # а FB продолжал отдавать ошибки на RID/SCD.
+    restart: unless-stopped
     build:
       context: ../..
       dockerfile: Dockerfile
@@ -150,6 +154,10 @@ services:
     profiles: ["", "with-yugabyte", "with-monitoring"]
 
   local-dss-dummy-oauth:
+    # Должен переживать перезагрузку хоста:
+    # без этой строки DSS исчезал после ребута,
+    # а FB продолжал отдавать ошибки на RID/SCD.
+    restart: unless-stopped
     build:
       context: ../..
       dockerfile: cmds/dummy-oauth/Dockerfile
